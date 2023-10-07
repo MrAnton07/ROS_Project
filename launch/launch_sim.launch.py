@@ -29,7 +29,7 @@ def generate_launch_description():
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')]),
-                    launch_arguments={'world':'src/ROS_Project/worlds/my_world'}.items()
+                    launch_arguments={'world': os.path.join(get_package_share_directory(package_name), 'worlds', 'my_world')}.items() #killall -9 gzclient gzserver
              )
 
     # Run the spawner node from the gazebo_ros package. The entity name doesn't really matter if you only have a single robot.
@@ -51,6 +51,24 @@ def generate_launch_description():
         arguments=["joint_broad"],
     )
 
+    my_rviz = Node(
+        package='rviz2', 
+        executable='rviz2', 
+        name='rviz2',
+        arguments=["-d", "/home/anton/dev_ws/src/ROS_Project/config/my_rviz.rviz"], #unset GTK_PATH            
+        output='screen')
+    
+    found_table = Node(
+        package='found_table',
+        executable='lidar_dif_viz',
+        name='founder'
+    )
+
+    vel_pub = Node(
+        package='move_to_table',
+        executable='vel_pub',
+        name='velocity_publisher'
+    )
 
 
     # Launch them all!
@@ -59,5 +77,8 @@ def generate_launch_description():
         gazebo,
         spawn_entity,
         diff_drive_spawner,
-        joint_broad_spawner
+        joint_broad_spawner,
+        my_rviz,
+        found_table,
+        vel_pub
     ])
