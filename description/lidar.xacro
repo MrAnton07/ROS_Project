@@ -41,19 +41,19 @@
             <ray>
                 <scan>
                     <horizontal>
-                        <samples>1200</samples>
+                        <samples>360</samples>
                         <min_angle>6.283</min_angle>
                         <max_angle>0</max_angle>
                     </horizontal>
                 </scan>
                 <range>
                     <min>0.3</min>
-                    <max>24</max>
+                    <max>12</max>
                 </range>
                 <noise>
                     <type>gaussian</type> <!-- Тип шума -->
                     <mean>0.0</mean> <!-- Среднее значение шума -->
-                    <stddev>0.10</stddev> <!-- Стандартное отклонение -->
+                    <stddev>0.04</stddev> <!-- Стандартное отклонение -->
                 </noise>
             </ray>
             <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">

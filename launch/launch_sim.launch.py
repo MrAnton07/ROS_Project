@@ -79,6 +79,6 @@ def generate_launch_description():
         diff_drive_spawner,
         joint_broad_spawner,
         my_rviz,
-        found_table,
-        vel_pub
+        # found_table,
+        # vel_pub
     ])
